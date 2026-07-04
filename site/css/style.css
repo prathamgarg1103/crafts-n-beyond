@@ -484,10 +484,19 @@ p a:hover, .footer a:hover { background-size: 100% 1.5px; }
   display: block;
 }
 
-/* mobile: native snap carousel */
+/* mobile: a plain vertical stack. no pin, no horizontal swipe fighting the
+   tissue-tear — the page just scrolls, cards reveal one by one. */
 @media (max-width: 767px) {
-  .work__pinwrap { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-  .card { scroll-snap-align: center; width: 78vw; }
+  .work__pinwrap { overflow: visible; }
+  .work__track {
+    flex-direction: column; align-items: center;
+    width: auto;
+    gap: clamp(2.75rem, 8vh, 4rem);
+    padding: clamp(2rem, 5vh, 3rem) var(--gutter) 2rem;
+  }
+  .card { width: 100%; max-width: 400px; }
+  .card__media { cursor: pointer; }
+  .work__progress { display: none; }
 }
 
 /* ═══ fold interlude (note → rose) ═══ */

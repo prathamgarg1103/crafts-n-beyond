@@ -398,7 +398,7 @@
         x: () => -getDist(),
         ease: 'none',
         scrollTrigger: {
-          trigger: pinwrap, start: 'top top', end: () => '+=' + Math.round(getDist() * 1.35),
+          trigger: pinwrap, start: 'top top', end: () => '+=' + Math.round(getDist()),
           pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1,
           onUpdate: (st) => { if (progress) progress.style.transform = 'scaleX(' + st.progress + ')'; },
         },
@@ -423,18 +423,14 @@
     });
 
     mm.add('(max-width: 767px)', () => {
-      const onScroll = () => {
-        const max = pinwrap.scrollWidth - pinwrap.clientWidth;
-        if (progress && max > 0) progress.style.transform = 'scaleX(' + pinwrap.scrollLeft / max + ')';
-      };
-      pinwrap.addEventListener('scroll', onScroll, { passive: true });
-      $$('.card').forEach((card, i) => {
+      // vertical stack — each card just reveals as it scrolls up. no carousel,
+      // no pin, nothing competing with the page scroll or the tissue tear.
+      $$('.card').forEach((card) => {
         gsap.from(card, {
-          opacity: 0, y: 36, duration: 0.7, ease: EXPO, delay: (i % 2) * 0.08,
-          scrollTrigger: { trigger: '.work__pinwrap', start: 'top 78%' },
+          opacity: 0, y: 40, duration: 0.7, ease: EXPO,
+          scrollTrigger: { trigger: card, start: 'top 85%' },
         });
       });
-      return () => pinwrap.removeEventListener('scroll', onScroll);
     });
   };
 
