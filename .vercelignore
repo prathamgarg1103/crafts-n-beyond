@@ -1,0 +1,5 @@
+# only the site/ folder is served — keep the deploy upload small
+.gstack/
+crafts_n_beyond_media/
+PRD.md
+.git/

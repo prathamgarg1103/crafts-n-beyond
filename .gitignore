@@ -1,0 +1,10 @@
+# gstack tooling state
+.gstack/
+
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+*.log
+
+# node (if a toolchain is added later)
+node_modules/

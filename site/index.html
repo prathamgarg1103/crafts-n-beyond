@@ -1,0 +1,388 @@
+<!doctype html>
+
+<!-- hand-coded for Crafts_n_beyond. no template, promise. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crafts_n_beyond — handmade shagun, trousseau &amp; hampers</title>
+  <meta name="description" content="Shagun nariyals, trousseau packing, money bouquets & hampers — made by hand, two at a time, for the days you'll remember forever." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Crafts_n_beyond — some gifts are wrapped. Ours are dressed." />
+  <meta property="og:description" content="Handmade shagun nariyals, trousseau packing & hampers. Order on WhatsApp." />
+  <!-- DEPLOY: set og:url + make og:image an ABSOLUTE URL (e.g. https://yourdomain.com/media/image_04.jpg) so WhatsApp/Instagram previews show the image. -->
+  <meta property="og:url" content="https://REPLACE-WITH-DOMAIN/" />
+  <meta property="og:image" content="https://REPLACE-WITH-DOMAIN/media/image_04.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="media/image_12.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0,0..1;1,9..144,100..900,0,0..1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500&text=%E0%A4%B6%E0%A4%97%E0%A5%81%E0%A4%A8&display=swap" rel="stylesheet" />
+  <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-armed')}catch(e){}</script>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- ═══ the wrap: page opens like a gift ═══ -->
+  <div class="wrap-cover" id="wrapCover" aria-hidden="true">
+    <div class="wrap-panel wrap-panel--top"></div>
+    <div class="wrap-panel wrap-panel--bottom"></div>
+    <svg class="wrap-bow" viewBox="0 0 120 70" fill="none">
+      <path class="bow-path" d="M60 38 C 42 18, 16 16, 12 32 C 8 48, 34 50, 58 39 M60 38 C 78 18, 104 16, 108 32 C 112 48, 86 50, 62 39 M58 40 C 50 52, 44 60, 40 66 M62 40 C 70 52, 76 60, 82 65 M56 35 a 5 5 0 1 0 8 0 a 5 5 0 1 0 -8 0" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"><span>view</span></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ═══ nav ═══ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Crafts_n_beyond — back to top">
+      <img class="nav__mark" src="media/image_12.jpg" alt="" width="34" height="34" />
+      <span class="nav__word">Crafts_n_beyond</span>
+    </a>
+    <a class="btn btn--pill nav__cta" data-magnetic href="https://wa.me/919588337180?text=Hi%20Crafts_n_beyond!%20I%27d%20love%20to%20order%20a%20custom%20hamper." target="_blank" rel="noopener">
+      <svg class="wa-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
+      <span>Order on WhatsApp</span>
+    </a>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══ scene 1 · hero ═══ -->
+    <section class="hero" id="top">
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow hero__eyebrow"><span class="status-dot" aria-hidden="true"></span>Handmade in India · taking orders for wedding season &rsquo;26</p>
+          <h1 class="hero__title">
+            <span class="line">Some gifts are wrapped.</span>
+            <span class="line line--em">Ours are <em class="foil" id="foilWord">dressed.</em></span>
+          </h1>
+          <p class="hero__sub body-l">Shagun nariyals, trousseau packing, money bouquets &amp; hampers — made by hand, two at a time, for the days you&rsquo;ll remember forever.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--solid" data-magnetic href="https://wa.me/919588337180?text=Hi%20Crafts_n_beyond!%20I%27d%20love%20to%20order%20a%20custom%20hamper." target="_blank" rel="noopener">Start your order</a>
+            <a class="btn btn--ghost" href="#work">See recent work<span class="btn__arrow" aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <div class="hero__archwrap" id="archWrap">
+            <div class="arch hero__arch" id="heroArch">
+              <video class="hero__video" src="video/hero-loop.mp4" poster="media/poster-hero.jpg" muted playsinline loop autoplay preload="metadata" aria-label="Bouquets being arranged by hand"></video>
+            </div>
+            <!-- the mauli: a red-gold thread tied around the arch; unties on your first scroll -->
+            <svg class="mauli" id="mauli" viewBox="0 0 300 450" fill="none" aria-hidden="true">
+              <g class="mauli-bands" id="mauliBands">
+                <path class="mauli-band" d="M-8 206 C 70 218, 230 218, 308 206" />
+                <path class="mauli-band mauli-band--gold" d="M-8 206 C 70 218, 230 218, 308 206" />
+                <path class="mauli-band" d="M-8 226 C 70 236, 230 236, 308 226" />
+                <path class="mauli-band mauli-band--gold" d="M-8 226 C 70 236, 230 236, 308 226" />
+              </g>
+              <g class="mauli-bow" id="mauliBow" transform="translate(224, 220)">
+                <path class="mauli-band mauli-loop mauli-loop--l" d="M0 0 C -34 -26, -64 -18, -60 -2 C -56 13, -22 13, 0 0" />
+                <path class="mauli-band mauli-loop mauli-loop--r" d="M0 0 C 28 -28, 58 -22, 55 -5 C 52 11, 22 13, 0 0" />
+                <path class="mauli-band mauli-tail mauli-tail--l" d="M-3 5 C -11 25, -17 42, -24 60" />
+                <path class="mauli-band mauli-tail mauli-tail--r" d="M5 5 C 13 27, 15 46, 21 63" />
+                <path class="mauli-band mauli-knot" d="M-7 -5 a 8 8 0 1 0 14 3 a 8 8 0 1 0 -14 -3" />
+              </g>
+            </svg>
+            <p class="annotation mauli-hint" id="mauliHint">kholo&nbsp;&rarr;</p>
+          </div>
+          <figure class="polaroid hero__cut hero__cut--a" data-depth="1.10">
+            <img src="media/image_04.jpg" alt="Luxury dry-fruit hamper draped in blush fabric" width="640" height="640" loading="eager" />
+          </figure>
+          <figure class="polaroid hero__cut hero__cut--b" data-depth="1.06">
+            <img src="media/image_11.jpg" alt="Coin shagun nariyal, hand-beaded" width="311" height="311" loading="eager" />
+          </figure>
+          <span class="stamp" aria-hidden="true">शगुन</span>
+        </div>
+      </div>
+
+      <div class="hero__scrollcue" aria-hidden="true">
+        <svg viewBox="0 0 40 64" fill="none"><path class="cue-path" d="M20 4 C 14 18, 28 26, 20 40 C 16 47, 20 54, 20 58 M14 52 L 20 60 L 26 52" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>scroll</span>
+      </div>
+    </section>
+
+    <!-- ═══ scene 2 · story ═══ -->
+    <section class="story" id="story">
+      <!-- shagun ⇄ शगुन : one pen, two scripts. scrubbed by scroll. -->
+      <div class="translit" id="translit" role="img" aria-label="The word shagun, written in Latin script and then in Devanagari">
+        <div class="translit__stage">
+          <svg viewBox="0 0 640 220" fill="none">
+            <g class="translit__latin" id="translitLatin">
+              <path d="M132 116 C 112 108, 96 116, 98 128 C 100 140, 126 138, 128 152 C 130 166, 104 170, 90 160" />
+              <path d="M160 74 L 160 164 M160 128 C 170 114, 194 112, 196 130 L 196 164" />
+              <path d="M258 128 C 240 116, 222 128, 222 146 C 222 164, 244 170, 258 156 M260 126 L 260 164" />
+              <path d="M324 128 C 306 116, 288 128, 288 146 C 288 164, 310 170, 324 156 M326 126 L 326 158 C 326 188, 310 198, 292 190" />
+              <path d="M352 126 L 352 152 C 352 168, 372 172, 384 158 M386 126 L 386 164" />
+              <path d="M414 164 L 414 128 M414 140 C 424 124, 448 124, 450 142 L 450 164" />
+            </g>
+            <path class="translit__swash" id="translitSwash" d="M180 192 C 250 180, 380 202, 462 186" />
+            <circle class="translit__dot" id="translitDot" r="4.5" cx="132" cy="116" opacity="0" />
+          </svg>
+          <span class="translit__word" id="translitWord" aria-hidden="true">&#x936;&#x917;&#x941;&#x928;</span>
+        </div>
+      </div>
+      <div class="story__grid">
+        <div class="story__sticky">
+          <div class="arch story__pane" id="storyPane">
+            <img src="media/image_06.jpg" alt="A money-rosette bouquet, arranged petal by petal on our worktable" width="640" height="640" loading="lazy" />
+          </div>
+          <p class="annotation story__note">yes, we really do tie<br/>every bow ourselves <span class="annotation__sig">— S&nbsp;&amp;&nbsp;S</span></p>
+        </div>
+        <div class="story__beats">
+          <p class="eyebrow">01 — The two of us</p>
+          <h2 class="story__title"><span class="line">Two pairs of hands.</span><span class="line">Every single piece.</span></h2>
+          <div class="beat">
+            <p class="body-l">Crafts_n_beyond is Saloni and Santwana — an artist duo who believe a gift&rsquo;s first impression begins before it&rsquo;s opened.</p>
+          </div>
+          <div class="beat">
+            <p class="body-l">Every coconut is painted, every ribbon tied, every tray arranged by <span class="circled" id="circledUs">the two of us<svg viewBox="0 0 200 60" aria-hidden="true"><path class="circle-path" id="circlePath" d="M16 34 C 20 12, 148 4, 178 20 C 200 32, 164 54, 84 54 C 34 54, 6 46, 14 28" /></svg></span>. No inventory. No assembly line.</p>
+          </div>
+          <div class="beat">
+            <p class="body-l">You tell us the occasion; we make the one thing that fits it.</p>
+          </div>
+        </div>
+      </div>
+      <svg class="thread thread--story" viewBox="0 0 200 800" fill="none" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <path class="thread-path" d="M100 0 C 60 120, 160 200, 110 330 C 70 440, 150 520, 100 640 C 80 700, 100 760, 100 800" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+      </svg>
+    </section>
+
+    <!-- ═══ scene 3 · recent work (horizontal) ═══ -->
+    <section class="work" id="work">
+      <div class="work__head">
+        <p class="eyebrow">02 — Recent work</p>
+        <h2 class="work__title">Fresh off the worktable.</h2>
+      </div>
+      <div class="work__pinwrap" id="workPin" data-lenis-prevent>
+        <div class="work__track" id="workTrack">
+          <article class="card">
+            <span class="card__num" aria-hidden="true">01</span>
+            <div class="arch card__media">
+              <img class="img-crop-top" src="media/image_09.jpg" alt="Coin shagun nariyal covered in antique coins and beads" width="311" height="311" loading="lazy" />
+              <img class="card__peek" src="media/image_11.jpg" alt="" width="311" height="311" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">Shagun Nariyals</h3>
+              <p class="card__note">Our coin nariyal went a little viral — painted, beaded and finished by hand for shagun that stands out on the thaal.</p>
+              <p class="card__chip">hand-beaded · most requested</p>
+            </div>
+          </article>
+          <article class="card">
+            <span class="card__num" aria-hidden="true">02</span>
+            <div class="arch card__media">
+              <img src="media/image_10.jpg" alt="A bride's trousseau dressed in white, ready to travel" width="640" height="480" loading="lazy" />
+              <img class="card__peek peek-zoom" src="media/image_10.jpg" alt="" width="640" height="480" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">Trousseau Packing</h3>
+              <p class="card__note">Fairy-tale packing for brides-to-be. Sarees, lehengas and gifts dressed like they&rsquo;re part of the celebration — because they are.</p>
+              <p class="card__chip">made to order · for a bride-to-be</p>
+            </div>
+          </article>
+          <article class="card">
+            <span class="card__num" aria-hidden="true">03</span>
+            <div class="arch card__media">
+              <img src="media/image_07.jpg" alt="Money bouquet — cash folded into blooms" width="311" height="311" loading="lazy" />
+              <img class="card__peek" src="media/image_08.jpg" alt="" width="311" height="311" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">Money Bouquets</h3>
+              <p class="card__note">Envelopes are done. Cash folded into blooms, arranged to order — the surprise that gets photographed.</p>
+              <p class="card__chip">folded to order · money bouquet</p>
+            </div>
+          </article>
+          <article class="card">
+            <span class="card__num" aria-hidden="true">04</span>
+            <div class="arch card__media">
+              <img src="media/image_04.jpg" alt="Luxury dry-fruit hamper styled in heritage fabrics" width="640" height="640" loading="lazy" />
+              <img class="card__peek peek-zoom" src="media/image_04.jpg" alt="" width="640" height="640" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">Dry-fruit &amp; Festive Hampers</h3>
+              <p class="card__note">Draped in grandeur, styled in heritage. Trays that make the rounds at weddings and never come back empty.</p>
+              <p class="card__chip">styled to order · wedding favourite</p>
+            </div>
+          </article>
+        </div>
+        <div class="work__progress" aria-hidden="true"><span id="workProgress"></span></div>
+      </div>
+    </section>
+
+    <!-- ═══ interlude · a note becomes a rose ═══ -->
+    <section class="fold" id="fold">
+      <div class="fold__pin" id="foldPin">
+        <p class="eyebrow">Interlude</p>
+        <h2 class="fold__title">How a note becomes a rose.</h2>
+        <div class="fold__stage" id="foldStage" role="img" aria-label="A shagun note accordion-folds itself into a paper rosette"></div>
+        <p class="fold__caption annotation" id="foldCaption">&hellip;and five of these make a bouquet.</p>
+      </div>
+    </section>
+
+    <!-- ═══ scene 4 · the reel, scrubbed ═══ -->
+    <section class="reel" id="reel">
+      <div class="reel__pin" id="reelPin">
+        <div class="reel__head">
+          <p class="eyebrow eyebrow--light">03 — The reel</p>
+          <h2 class="reel__title">Order after order, all by hand.</h2>
+          <p class="reel__hint">you drive — scroll slowly</p>
+        </div>
+        <div class="reel__framewrap">
+          <svg class="reel__rosette" id="reelRosette" viewBox="0 0 64 48" fill="none" aria-hidden="true">
+            <g stroke="#B08841" stroke-width="1.6" stroke-linecap="round">
+              <path d="M32 40 C 18 36, 10 24, 14 12 C 24 18, 30 28, 32 40" fill="#C98B82" fill-opacity="0.5"/>
+              <path d="M32 40 C 46 36, 54 24, 50 12 C 40 18, 34 28, 32 40" fill="#C98B82" fill-opacity="0.5"/>
+              <path d="M32 40 C 24 28, 24 14, 32 6 C 40 14, 40 28, 32 40" fill="#E9CCC5" fill-opacity="0.75"/>
+              <circle cx="32" cy="38" r="5" fill="#8F2D2D"/>
+            </g>
+          </svg>
+          <div class="arch reel__frame">
+            <video id="scrubVideo" src="video/work-scrub.mp4" poster="media/poster-scrub.jpg" muted playsinline preload="none" aria-label="A montage of finished orders: bouquets, hampers, bottle art, resin work"></video>
+            <div class="reel__stamp" aria-hidden="true"><span id="reelTime">0:00</span></div>
+          </div>
+        </div>
+        <p class="reel__caption">Every piece here left our table and made someone&rsquo;s day.</p>
+
+        <!-- margin notes: our handwriting in the margins, drawn as you scrub -->
+        <div class="mnote mnote--1" id="mnote1" aria-hidden="true">
+          <p class="mnote__text">haan, yeh gota humne<br/>khud pleat kiya</p>
+          <svg viewBox="0 0 80 60"><path d="M8 6 C 34 8, 58 20, 68 44 M59 37 L 69 46 L 72 32" /></svg>
+        </div>
+        <div class="mnote mnote--2" id="mnote2" aria-hidden="true">
+          <p class="mnote__text"><span class="strike">second</span> third attempt,<br/>don&rsquo;t ask</p>
+          <svg viewBox="0 0 80 60"><path d="M8 6 C 34 8, 58 20, 68 44 M59 37 L 69 46 L 72 32" /></svg>
+        </div>
+        <div class="mnote mnote--3" id="mnote3" aria-hidden="true">
+          <p class="mnote__text">the viral one <span aria-hidden="true">&#10022;</span></p>
+          <svg viewBox="0 0 80 60"><path d="M8 6 C 34 8, 58 20, 68 44 M59 37 L 69 46 L 72 32" /></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ scene 5 · kind words ═══ -->
+    <section class="kind" id="kind" aria-labelledby="kindHeading">
+      <h2 id="kindHeading" class="visually-hidden">Kind words from a client</h2>
+      <div class="kind__grid">
+        <figure class="polaroid polaroid--taped kind__photo">
+          <img src="media/image_10.jpg" alt="A bride's trousseau, packed and ready to travel" width="640" height="480" loading="lazy" />
+          <figcaption class="annotation">a bride&rsquo;s trousseau,<br/>ready to travel</figcaption>
+        </figure>
+        <blockquote class="kind__quote">
+          <p class="eyebrow">04 — Kind words</p>
+          <p class="kind__text"><span class="qmark" aria-hidden="true">&ldquo;</span>Thank you Crafts and Beyond for the beautiful gift packing. The presentation was elegant, neat, and made the gift feel extra special. Your attention to detail really shows.<span class="kind__hl"> Highly appreciated and definitely recommended.</span><span class="qmark qmark--close" aria-hidden="true">&rdquo;</span></p>
+          <cite class="kind__cite">— a happy client, via Instagram</cite>
+        </blockquote>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marqueeTrack">
+          <span>Shagun Nariyal · Trousseau Packing · Money Bouquet · Rakhi · Hampers · Handmade in India · </span><span>Shagun Nariyal · Trousseau Packing · Money Bouquet · Rakhi · Hampers · Handmade in India · </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ scene 6 · process ═══ -->
+    <section class="process" id="process">
+      <div class="process__head">
+        <p class="eyebrow">05 — How it works</p>
+        <h2 class="process__title">Made to order, not to stock.</h2>
+      </div>
+      <svg class="thread thread--process" viewBox="0 0 80 1200" fill="none" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+        <path class="thread-path" d="M40 0 C 20 150, 60 250, 40 400 C 25 520, 55 620, 40 780 C 28 900, 52 1020, 40 1200" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <ol class="process__steps">
+        <li class="step">
+          <span class="step__num" data-count="1">1</span>
+          <svg class="step__icon" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+            <path class="icon-path" d="M18 30 a 12 12 0 0 1 12 -12 h 36 a 12 12 0 0 1 12 12 v 20 a 12 12 0 0 1 -12 12 H 44 l -14 12 v -12 h -3 a 12 12 0 0 1 -12 -12 Z M40 38 c 0 -4 4 -6 8 -3 c 4 -3 8 -1 8 3 c 0 4 -8 9 -8 9 s -8 -5 -8 -9 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="step__name">Tell us the occasion</h3>
+          <p class="step__copy">DM or WhatsApp us the date, the budget, and who it&rsquo;s for.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" data-count="2">2</span>
+          <svg class="step__icon" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+            <path class="icon-path" d="M64 14 l 14 14 -40 40 -18 5 5 -18 Z M58 22 l 14 14 M14 82 c 10 -6 18 2 28 -3" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="step__name">We sketch the idea</h3>
+          <p class="step__copy">Colours, materials and a reference photo before we begin.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" data-count="3">3</span>
+          <svg class="step__icon" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+            <path class="icon-path" d="M48 46 C 36 30, 16 30, 14 42 C 12 54, 32 56, 46 47 M48 46 C 60 30, 80 30, 82 42 C 84 54, 64 56, 50 47 M46 48 c -6 10, -10 16, -13 21 M50 48 c 6 10, 10 16, 14 20 M44 44 a 5 5 0 1 0 8 0 a 5 5 0 1 0 -8 0" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="step__name">Made by hand</h3>
+          <p class="step__copy">Every element cut, tied, painted and arranged by the two of us.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" data-count="4">4</span>
+          <svg class="step__icon" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+            <path class="icon-path" d="M16 40 h 64 v 38 a 4 4 0 0 1 -4 4 H 20 a 4 4 0 0 1 -4 -4 Z M12 28 h 72 v 12 H 12 Z M48 28 v 54 M48 28 c -10 -2 -16 -12 -10 -16 c 6 -4 12 6 10 16 c 2 -10 8 -20 14 -16 c 6 4 0 14 -14 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="step__name">Delivered for your day</h3>
+          <p class="step__copy">Packed to survive the journey and steal the moment.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ═══ scene 7 · closing ═══ -->
+    <section class="closing" id="order">
+      <img class="closing__bg" src="media/image_11.jpg" alt="" aria-hidden="true" />
+      <div class="closing__inner">
+        <h2 class="closing__title">
+          <span class="line">Make it</span>
+          <span class="line line--em"><em id="underlineWord">unforgettable.</em>
+            <svg class="underline-svg" viewBox="0 0 420 26" fill="none" preserveAspectRatio="none" aria-hidden="true">
+              <path class="underline-path" d="M6 18 C 90 8, 180 22, 262 13 C 320 7, 380 15, 414 11" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </h2>
+        <span class="cta-wrap">
+          <!-- the thread comes back: the page reties the bow around your order -->
+          <svg class="cta-bow" id="ctaBow" viewBox="0 0 340 140" aria-hidden="true">
+            <path class="cta-bow__band" id="ctaBand" d="M170 22 C 88 22, 22 40, 22 70 C 22 100, 88 118, 170 118 C 252 118, 318 100, 318 70 C 318 40, 252 22, 170 22" />
+            <g id="ctaKnot" transform="translate(170, 21)">
+              <path d="M0 0 C -20 -16, -40 -12, -37 -1 C -34 9, -12 8, 0 0" />
+              <path d="M0 0 C 18 -17, 38 -13, 36 -2 C 34 8, 13 8, 0 0" />
+              <path d="M-2 3 C -7 14, -10 22, -13 30" />
+              <path d="M3 3 C 8 15, 9 24, 12 31" />
+              <path d="M-5 -3 a 5.5 5.5 0 1 0 10 2 a 5.5 5.5 0 1 0 -10 -2" />
+            </g>
+          </svg>
+          <a class="btn btn--solid btn--big" data-magnetic id="waBtn" href="https://wa.me/919588337180?text=Hi%20Crafts_n_beyond!%20I%27d%20love%20to%20order%20a%20custom%20hamper." target="_blank" rel="noopener">
+          <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
+          Order on WhatsApp
+          </a>
+        </span>
+        <p class="closing__ps annotation">P.S. — tell us your city and date early. We book fast in wedding season.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <img class="footer__mark" src="media/image_12.jpg" alt="Crafts_n_beyond monogram" width="40" height="40" loading="lazy" />
+    <p class="footer__line">Crafts_n_beyond · handmade gifting studio</p>
+    <p class="footer__links">
+      <a href="https://www.instagram.com/crafts_n_beyond_/" target="_blank" rel="noopener">@crafts_n_beyond_</a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://wa.me/919588337180">WhatsApp 95883 37180</a>
+    </p>
+    <p class="footer__small">Built by hand, like everything else we do.</p>
+  </footer>
+
+</body>
+</html>
