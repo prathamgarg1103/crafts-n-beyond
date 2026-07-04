@@ -358,22 +358,39 @@ p a:hover, .footer a:hover { background-size: 100% 1.5px; }
 
 .story { position: relative; padding: clamp(5rem, 12vh, 9rem) var(--gutter); }
 
-.translit { display: flex; justify-content: center; margin-bottom: clamp(3rem, 8vh, 5rem); }
-.translit__stage { position: relative; }
-.translit svg { width: min(460px, 74vw); overflow: visible; color: var(--maroon); display: block; }
-.translit path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
-.translit .translit__swash { stroke: var(--gold); stroke-width: 4.5; }
-.translit .translit__dot { fill: var(--maroon); }
-.translit__word {
-  position: absolute; inset: 0;
+/* ═══ word cycle — a wordmark that keeps updating ═══ */
+.wordcycle {
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: clamp(3rem, 8vh, 5rem);
+  text-align: center;
+}
+.wordcycle__lead { margin: 0 0 0.9rem; color: var(--rose-text); }
+.wordcycle__stage {
+  position: relative; width: 100%;
+  min-height: clamp(4.5rem, 11vw, 7rem);
   display: grid; place-items: center;
+}
+.wordcycle__item {
+  grid-area: 1 / 1;               /* stack every word in the same cell */
+  display: flex; flex-direction: column; align-items: center; gap: 0.1em;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "wght" 540, "WONK" 1;
+  font-size: clamp(2.2rem, 6.2vw, 4.6rem);
+  line-height: 1.0; color: var(--maroon);
+  max-width: 16ch;
+  clip-path: inset(-12% 100% -12% 0);   /* hidden: revealed L→R by JS */
+  will-change: clip-path, transform;
+}
+.wordcycle__item--dev {
   font-family: "Noto Serif Devanagari", serif;
-  font-size: clamp(4.4rem, 10vw, 6.2rem);
-  font-weight: 500;
-  color: var(--maroon);
-  line-height: 1;
-  padding-bottom: 0.35em;
-  clip-path: inset(-10% 100% -10% 0);
+  font-variation-settings: normal; font-weight: 500;
+  font-size: clamp(3.6rem, 9vw, 6rem);
+}
+.wordcycle__word { display: block; }
+.wordcycle__swash { width: clamp(120px, 26vw, 240px); height: 16px; overflow: visible; color: var(--gold); margin-top: 0.15em; }
+.wordcycle__swash path { fill: none; stroke: currentColor; stroke-width: 4.5; stroke-linecap: round; }
+@media (prefers-reduced-motion: reduce) {
+  .wordcycle__item { clip-path: none; }   /* JS cross-fades opacity instead */
 }
 
 .story__grid {

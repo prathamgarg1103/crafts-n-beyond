@@ -60,9 +60,8 @@
       $$('.icon-path, .thread-path, .circle-path, .cta-bow path, .underline-path, .translit__swash').forEach((p) => {
         p.style.strokeDasharray = 'none'; p.style.strokeDashoffset = '0';
       });
-      // translit: latin fades out, the Devanagari word shows in full (its clip-path is otherwise closed)
-      const latin = $('#translitLatin'); if (latin) latin.style.opacity = '0';
-      const word = $('#translitWord'); if (word) word.style.clipPath = 'inset(-10% 0% -10% 0)';
+      // wordmark: static (no cycling) in reduced motion
+      buildWordCycle({ reduced: true });
       // gallery still needs to exist — build static cards (posters, no autoplay) + wire the lightbox
       buildGallery({ reduced: true });
       initLightbox();
@@ -125,7 +124,7 @@
     initNav();
     initThreads();
     initStory();
-    initTranslit();
+    buildWordCycle();
     initWork();
     initTissue();
     initGalleryVideos();
@@ -354,36 +353,86 @@
     }
   };
 
-  /* shagun un-writes, शगुन inks itself in — you hold the pen */
-  const initTranslit = () => {
-    const wrap = $('#translit');
-    if (!wrap) return;
-    const latin = $$('#translitLatin path');
-    const word = $('#translitWord');
-    const swash = $('#translitSwash');
-    const dot = $('#translitDot');
-    latin.forEach((p) => { prepDraw(p); p.style.strokeDashoffset = 0; });
-    prepDraw(swash);
+  /* the wordmark keeps updating — inks in one service, holds, swaps to the next */
+  const WORDS = [
+    { text: 'शगुन', dev: true },   // शगुन
+    { text: 'Trousseau Packing' },
+    { text: 'Handcrafted Gifts' },
+    { text: 'Customised &amp; Personalised Gifts' },
+  ];
+  const SWASH_D = 'M8 12 C 60 4, 150 18, 232 8';
 
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: wrap, start: 'top 92%', end: 'top 22%', scrub: 0.7 },
-      defaults: { ease: 'none' },
+  const buildWordCycle = (opts) => {
+    const stage = $('#wordCycleStage');
+    if (!stage || !window.gsap) return;
+    const reduced = opts && opts.reduced;
+    stage.innerHTML = '';
+    const items = WORDS.map((w) => {
+      const item = document.createElement('div');
+      item.className = 'wordcycle__item' + (w.dev ? ' wordcycle__item--dev' : '');
+      const span = document.createElement('span');
+      span.className = 'wordcycle__word';
+      span.innerHTML = w.text;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'wordcycle__swash');
+      svg.setAttribute('viewBox', '0 0 240 16');
+      svg.setAttribute('fill', 'none');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', SWASH_D);
+      svg.appendChild(path);
+      item.append(span, svg);
+      stage.appendChild(item);
+      return { item, path, len: 0 };
     });
-    // latin retracts in reverse writing order (n → s)
-    [...latin].reverse().forEach((p, i) => {
-      tl.to(p, { strokeDashoffset: () => -p.getTotalLength(), duration: 0.5 }, i * 0.24)
-        .to(p, { autoAlpha: 0, duration: 0.02 }, i * 0.24 + 0.48); // round linecaps leave ink dots at zero length
+    // fit longer phrases so they never overflow their cell
+    items.forEach((it) => {
+      const span = $('.wordcycle__word', it.item);
+      let guard = 0;
+      while (span.scrollWidth > stage.clientWidth && guard < 24) {
+        const cur = parseFloat(getComputedStyle(span).fontSize);
+        span.style.fontSize = (cur * 0.94) + 'px';
+        guard++;
+      }
+      it.len = it.path.getTotalLength();
     });
-    // the pen: appears at the last latin stroke, sweeps the devanagari in
-    tl.to(dot, { opacity: 1, duration: 0.08 }, 0.15)
-      .to(dot, { attr: { cx: 132, cy: 130 }, duration: 1.2 }, 0.3)
-      .to(dot, { attr: { cx: 175, cy: 150 }, duration: 0.3 }, 1.55)
-      // the word inks in left→right under the travelling pen
-      .to(word, { clipPath: 'inset(-10% 0% -10% 0)', duration: 1.7, ease: 'power1.inOut' }, 1.8)
-      .to(dot, { attr: { cx: 470, cy: 150 }, duration: 1.7, ease: 'power1.inOut' }, 1.8)
-      // one confident gold swash beneath — the signature
-      .to(swash, { strokeDashoffset: 0, duration: 0.55, ease: 'power2.out' }, 3.55)
-      .to(dot, { attr: { cx: 470, cy: 190 }, opacity: 0, duration: 0.3 }, 3.7);
+
+    if (reduced) {
+      // reduced motion: no cycling. show the signature word, static.
+      items.forEach((it, i) => {
+        it.item.style.clipPath = 'none';
+        it.item.style.opacity = i === 0 ? '1' : '0';
+        it.path.style.strokeDasharray = 'none';
+        it.path.style.strokeDashoffset = '0';
+        it.path.style.opacity = i === 0 ? '1' : '0';
+      });
+      return;
+    }
+
+    items.forEach((it) => {
+      gsap.set(it.item, { clipPath: 'inset(-12% 100% -12% 0)', y: 8 });
+      prepDraw(it.path);
+    });
+
+    const tl = gsap.timeline({ repeat: -1, defaults: { ease: EXPO } });
+    items.forEach((it, i) => {
+      // ink the word in L→R, rise to rest, draw the gold swash
+      tl.to(it.item, { clipPath: 'inset(-12% 0% -12% 0)', y: 0, duration: 0.7 }, '+=0')
+        .to(it.path, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, '<0.25')
+        // hold
+        .to(it.item, { duration: 1.7 }, '>')
+        // wipe out to the left, swash retracts — unless it's the last (loop wraps to first)
+        .to(it.item, { clipPath: 'inset(-12% 0% -12% 100%)', y: -6, duration: 0.55, ease: 'power2.in' }, '>')
+        .to(it.path, { strokeDashoffset: () => it.len, duration: 0.35, ease: 'power2.in' }, '<')
+        // reset this item off-screen-right for its next turn
+        .set(it.item, { clipPath: 'inset(-12% 100% -12% 0)', y: 8 })
+        .set(it.path, { strokeDashoffset: () => it.len });
+    });
+
+    // pause the loop while the section is off-screen (perf)
+    ScrollTrigger.create({
+      trigger: '#wordCycle', start: 'top bottom', end: 'bottom top',
+      onToggle: (self) => { self.isActive ? tl.play() : tl.pause(); },
+    });
   };
 
   /* ─────────────────────────────────────────────
