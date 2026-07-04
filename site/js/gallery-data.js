@@ -86,13 +86,18 @@ window.GALLERY = [
         "src": "08.jpg",
         "w": 1200,
         "h": 900
+      },
+      {
+        "src": "09.jpg",
+        "w": 640,
+        "h": 480
       }
     ],
     "videos": [
       "video.mp4"
     ],
     "poster": "poster.jpg",
-    "count": 8
+    "count": 9
   },
   {
     "slug": "money",
@@ -118,11 +123,16 @@ window.GALLERY = [
         "src": "04.jpg",
         "w": 675,
         "h": 1200
+      },
+      {
+        "src": "05.jpg",
+        "w": 540,
+        "h": 960
       }
     ],
     "videos": [],
     "poster": "01.jpg",
-    "count": 4
+    "count": 5
   },
   {
     "slug": "bouquets",
@@ -138,13 +148,23 @@ window.GALLERY = [
         "src": "02.jpg",
         "w": 675,
         "h": 1200
+      },
+      {
+        "src": "03.jpg",
+        "w": 640,
+        "h": 640
+      },
+      {
+        "src": "04.jpg",
+        "w": 540,
+        "h": 960
       }
     ],
     "videos": [
       "video.mp4"
     ],
     "poster": "poster.jpg",
-    "count": 2
+    "count": 4
   },
   {
     "slug": "customised-gifts",
@@ -202,11 +222,16 @@ window.GALLERY = [
         "src": "02.jpg",
         "w": 339,
         "h": 445
+      },
+      {
+        "src": "03.jpg",
+        "w": 640,
+        "h": 640
       }
     ],
     "videos": [],
     "poster": "01.jpg",
-    "count": 2
+    "count": 3
   },
   {
     "slug": "resins",
