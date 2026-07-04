@@ -10,6 +10,7 @@
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const MOBILE = matchMedia('(max-width: 767px)').matches;
   const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let lenisRef = null; // shared so the lightbox can pause/resume smooth scroll
 
   const $ = (s, c) => (c || document).querySelector(s);
   const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
@@ -62,6 +63,10 @@
       // translit: latin fades out, the Devanagari word shows in full (its clip-path is otherwise closed)
       const latin = $('#translitLatin'); if (latin) latin.style.opacity = '0';
       const word = $('#translitWord'); if (word) word.style.clipPath = 'inset(-10% 0% -10% 0)';
+      // gallery still needs to exist — build static cards (posters, no autoplay) + wire the lightbox
+      buildGallery({ reduced: true });
+      initLightbox();
+      $$('.card__still').forEach((im) => { im.style.opacity = '1'; });
       const nav = $('#nav');
       addEventListener('scroll', () => nav.classList.toggle('is-scrolled', scrollY > 80), { passive: true });
     });
@@ -96,6 +101,7 @@
         // let anything opted-out (the mobile card carousel) scroll natively
         prevent: (node) => !!(node && node.closest && node.closest('[data-lenis-prevent]')),
       });
+      lenisRef = lenis;
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((t) => lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);
@@ -113,6 +119,8 @@
       document.documentElement.classList.add('lenis-on');
     }
 
+    buildGallery();        // cards from gallery-data.js — before initWork/initTissue query them
+    initLightbox();
     seedTilts();
     initNav();
     initThreads();
@@ -120,6 +128,7 @@
     initTranslit();
     initWork();
     initTissue();
+    initGalleryVideos();
     initFold();
     initReel();
     initKind();
@@ -432,6 +441,156 @@
         });
       });
     });
+  };
+
+  /* ─────────────────────────────────────────────
+     gallery: build the category cards from gallery-data.js
+     ───────────────────────────────────────────── */
+  const CATS = (window.GALLERY || []);
+  let openLightbox = () => {};
+
+  const buildGallery = (opts) => {
+    const track = $('#workTrack');
+    if (!track || !CATS.length) return;
+    const reduced = opts && opts.reduced;
+    track.innerHTML = '';
+    CATS.forEach((c, i) => {
+      const base = 'media/gallery/' + c.slug + '/';
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.slug = c.slug;
+
+      const num = document.createElement('span');
+      num.className = 'card__num';
+      num.setAttribute('aria-hidden', 'true');
+      num.textContent = String(i + 1).padStart(2, '0');
+
+      const media = document.createElement('div');
+      media.className = 'arch card__media';
+      if (c.videos && c.videos.length && !reduced) {
+        const v = document.createElement('video');
+        v.className = 'card__video';
+        v.muted = true; v.loop = true; v.playsInline = true;
+        v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+        v.preload = 'none';
+        v.poster = base + c.poster;
+        v.dataset.src = base + c.videos[0];
+        media.appendChild(v);
+      } else {
+        const img = document.createElement('img');
+        img.className = 'card__still';
+        img.src = base + c.poster;
+        img.alt = c.name + ' by Crafts_n_beyond';
+        img.loading = 'lazy';
+        media.appendChild(img);
+      }
+
+      const body = document.createElement('div');
+      body.className = 'card__body';
+      const h = document.createElement('h3');
+      h.className = 'card__name';
+      h.textContent = c.name;
+      const note = document.createElement('p');
+      note.className = 'card__note';
+      note.textContent = c.note;
+      const btn = document.createElement('button');
+      btn.className = 'card__seeall';
+      btn.type = 'button';
+      const total = c.count + (c.videos ? c.videos.length : 0);
+      btn.innerHTML = 'See all ' + total + ' <span aria-hidden="true">&rarr;</span>';
+      btn.setAttribute('aria-label', 'See all ' + c.name + ' photos');
+      btn.addEventListener('click', () => openLightbox(c.slug));
+      body.append(h, note, btn);
+
+      // the revealed media is also a doorway into the full set
+      media.addEventListener('click', (e) => {
+        if (media.querySelector('.tissue')) return; // still wrapped — let the tear handle it
+        openLightbox(c.slug);
+      });
+
+      card.append(num, media, body);
+      track.appendChild(card);
+    });
+  };
+
+  /* category videos: load + play only while on screen (perf + battery) */
+  const initGalleryVideos = () => {
+    const vids = $$('.card__video');
+    if (!vids.length || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        const v = en.target;
+        if (en.isIntersecting && en.intersectionRatio > 0.55) {
+          if (!v.src && v.dataset.src) v.src = v.dataset.src;
+          const p = v.play(); if (p && p.catch) p.catch(() => {});
+        } else {
+          try { v.pause(); } catch (e) {}
+        }
+      });
+    }, { threshold: [0, 0.55, 1] });
+    vids.forEach((v) => io.observe(v));
+  };
+
+  /* ─────────────────────────────────────────────
+     lightbox: a category's full set
+     ───────────────────────────────────────────── */
+  const initLightbox = () => {
+    const lb = $('#lightbox');
+    if (!lb) return;
+    const grid = $('#lbGrid'), title = $('#lbTitle'), note = $('#lbNote'), eyebrow = $('#lbEyebrow');
+    const panel = $('.lightbox__panel', lb);
+    let lastFocus = null;
+
+    const close = () => {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      grid.innerHTML = ''; // unmount media (stops any playing video)
+      document.body.style.overflow = '';
+      if (lenisRef) lenisRef.start();
+      if (lastFocus) { try { lastFocus.focus(); } catch (e) {} }
+    };
+
+    openLightbox = (slug) => {
+      const c = CATS.find((x) => x.slug === slug);
+      if (!c) return;
+      lastFocus = document.activeElement;
+      const base = 'media/gallery/' + c.slug + '/';
+      title.textContent = c.name;
+      note.textContent = c.note;
+      eyebrow.textContent = String(CATS.indexOf(c) + 1).padStart(2, '0') + ' — the full set';
+      grid.innerHTML = '';
+      // video(s) first, then photos
+      (c.videos || []).forEach((v) => {
+        const fig = document.createElement('figure');
+        fig.className = 'lb-item lb-item--video';
+        const el = document.createElement('video');
+        el.src = base + v; el.muted = true; el.loop = true; el.playsInline = true;
+        el.setAttribute('muted', ''); el.setAttribute('playsinline', '');
+        el.controls = true; el.preload = 'metadata'; el.poster = base + c.poster;
+        const pr = el.play && el.play(); if (pr && pr.catch) pr.catch(() => {});
+        fig.appendChild(el); grid.appendChild(fig);
+      });
+      c.photos.forEach((p, idx) => {
+        const fig = document.createElement('figure');
+        fig.className = 'lb-item';
+        fig.style.animationDelay = Math.min(idx * 0.045, 0.4) + 's';
+        const img = document.createElement('img');
+        img.src = base + p.src; img.loading = 'lazy';
+        img.width = p.w; img.height = p.h;
+        img.alt = c.name + ' — piece ' + (idx + 1);
+        fig.appendChild(img); grid.appendChild(fig);
+      });
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (lenisRef) lenisRef.stop();
+      panel.scrollTop = 0;
+      $('#lbClose').focus();
+    };
+
+    lb.addEventListener('click', (e) => { if (e.target.hasAttribute('data-lb-close')) close(); });
+    $('#lbClose').addEventListener('click', close);
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('is-open')) close(); });
   };
 
   /* ─────────────────────────────────────────────
